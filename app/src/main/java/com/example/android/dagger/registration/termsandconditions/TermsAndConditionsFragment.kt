@@ -21,14 +21,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.android.dagger.R
 import com.example.android.dagger.registration.RegistrationActivity
 import com.example.android.dagger.registration.RegistrationViewModel
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class TermsAndConditionsFragment : Fragment() {
+class TermsAndConditionsFragment : DaggerFragment() {
 
-    private lateinit var registrationViewModel: RegistrationViewModel
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val registrationViewModel: RegistrationViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory)[RegistrationViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,8 +44,6 @@ class TermsAndConditionsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_terms_and_conditions, container, false)
-
-        registrationViewModel = (activity as RegistrationActivity).registrationViewModel
 
         view.findViewById<Button>(R.id.next).setOnClickListener {
             registrationViewModel.acceptTCs()
