@@ -11,13 +11,11 @@ import dagger.multibindings.IntoMap
 @Module
 abstract class UserModules {
 
-    @LoggedUserScope
     @Binds
     @IntoMap
     @ViewModelKey(MainViewModel::class)
     abstract fun bindMainViewModel(viewModel: MainViewModel): ViewModel
 
-    @LoggedUserScope
     @Binds
     @IntoMap
     @ViewModelKey(SettingsViewModel::class)
