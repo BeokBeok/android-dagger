@@ -17,9 +17,8 @@
 package com.example.android.dagger
 
 import android.app.Application
+import com.example.android.dagger.di.AppComponent
 import com.example.android.dagger.di.DaggerAppComponent
-import com.example.android.dagger.storage.SharedPreferencesStorage
-import com.example.android.dagger.user.UserManager
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -32,12 +31,14 @@ open class MyApplication : Application(), HasAndroidInjector {
 
     override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
 
-    open val userManager by lazy {
-        UserManager(SharedPreferencesStorage(this))
+    val appComponent: AppComponent by lazy {
+        DaggerAppComponent.builder()
+                .context(applicationContext)
+                .build()
     }
 
     override fun onCreate() {
         super.onCreate()
-        DaggerAppComponent.builder().context(applicationContext).build().inject(this)
+        appComponent.inject(this)
     }
 }
