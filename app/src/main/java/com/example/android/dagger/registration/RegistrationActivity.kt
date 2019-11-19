@@ -19,31 +19,34 @@ package com.example.android.dagger.registration
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.example.android.dagger.MyApplication
 import com.example.android.dagger.R
 import com.example.android.dagger.main.MainActivity
 import com.example.android.dagger.registration.enterdetails.EnterDetailsFragment
 import com.example.android.dagger.registration.termsandconditions.TermsAndConditionsFragment
+import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
-import dagger.android.support.AndroidSupportInjection
-import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-class RegistrationActivity : DaggerAppCompatActivity() {
+class RegistrationActivity : AppCompatActivity(), HasAndroidInjector {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
+
+    override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
 
     private val registrationViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory)[RegistrationViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 

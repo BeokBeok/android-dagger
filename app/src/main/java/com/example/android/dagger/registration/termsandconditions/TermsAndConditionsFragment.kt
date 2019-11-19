@@ -16,20 +16,22 @@
 
 package com.example.android.dagger.registration.termsandconditions
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.android.dagger.R
 import com.example.android.dagger.registration.RegistrationActivity
 import com.example.android.dagger.registration.RegistrationViewModel
-import dagger.android.support.DaggerFragment
+import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
-class TermsAndConditionsFragment : DaggerFragment() {
+class TermsAndConditionsFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -51,5 +53,10 @@ class TermsAndConditionsFragment : DaggerFragment() {
         }
 
         return view
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        AndroidSupportInjection.inject(this)
     }
 }

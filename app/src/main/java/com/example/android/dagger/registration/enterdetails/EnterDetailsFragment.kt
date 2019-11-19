@@ -16,6 +16,7 @@
 
 package com.example.android.dagger.registration.enterdetails
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,16 +25,17 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.android.dagger.R
 import com.example.android.dagger.registration.RegistrationActivity
 import com.example.android.dagger.registration.RegistrationViewModel
-import dagger.android.support.DaggerFragment
+import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
-class EnterDetailsFragment : DaggerFragment() {
+class EnterDetailsFragment : Fragment() {
 
     /**
      * RegistrationViewModel is used to set the username and password information (attached to
@@ -87,6 +89,11 @@ class EnterDetailsFragment : DaggerFragment() {
 
         setupViews(view)
         return view
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        AndroidSupportInjection.inject(this)
     }
 
     private fun setupViews(view: View) {
