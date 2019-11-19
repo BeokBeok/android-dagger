@@ -12,9 +12,10 @@ class ViewModelFactory @Inject constructor(
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         val creator =
-                viewModelProviders[modelClass] ?: viewModelProviders.asIterable().firstOrNull {
-                    modelClass.isAssignableFrom(it.key)
-                }?.value ?: throw IllegalArgumentException("unknown model class $modelClass")
+                viewModelProviders[modelClass] ?: viewModelProviders.asIterable()
+                        .firstOrNull { modelClass.isAssignableFrom(it.key) }
+                        ?.value
+                ?: throw IllegalArgumentException("unknown model class $modelClass")
 
         return try {
             @Suppress("UNCHECKED_CAST")

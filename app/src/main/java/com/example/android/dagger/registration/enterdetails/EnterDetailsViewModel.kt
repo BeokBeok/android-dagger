@@ -19,7 +19,7 @@ package com.example.android.dagger.registration.enterdetails
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.android.dagger.di.ActivityScope
+import com.example.android.dagger.di.scope.ActivityScope
 import javax.inject.Inject
 
 private const val MAX_LENGTH = 5
