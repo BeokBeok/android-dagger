@@ -27,6 +27,8 @@ import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.android.dagger.R
 import com.example.android.dagger.registration.RegistrationActivity
 import com.example.android.dagger.registration.RegistrationViewModel
@@ -44,10 +46,15 @@ class EnterDetailsFragment : Fragment() {
      * different ViewModels with different lifecycles.
      */
     @Inject
-    lateinit var registrationViewModel: RegistrationViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    @Inject
-    lateinit var enterDetailsViewModel: EnterDetailsViewModel
+    private val registrationViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory)[RegistrationViewModel::class.java]
+    }
+
+    private val enterDetailsViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory)[EnterDetailsViewModel::class.java]
+    }
 
     private lateinit var errorTextView: TextView
     private lateinit var usernameEditText: EditText

@@ -13,7 +13,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [
     StorageModule::class,
-    AppSubComponent::class
+    AppSubComponents::class
 ])
 interface AppComponent {
 

@@ -23,6 +23,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.android.dagger.R
 import com.example.android.dagger.registration.RegistrationActivity
 import com.example.android.dagger.registration.RegistrationViewModel
@@ -31,7 +33,11 @@ import javax.inject.Inject
 class TermsAndConditionsFragment : Fragment() {
 
     @Inject
-    lateinit var registrationViewModel: RegistrationViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val registrationViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory)[RegistrationViewModel::class.java]
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater,

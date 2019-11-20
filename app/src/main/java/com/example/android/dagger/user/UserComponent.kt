@@ -6,7 +6,7 @@ import com.example.android.dagger.settings.SettingsActivity
 import dagger.Subcomponent
 
 @LoggedUserScope
-@Subcomponent
+@Subcomponent(modules = [UserModules::class])
 interface UserComponent {
 
     @Subcomponent.Factory

@@ -52,4 +52,6 @@ dependencies {
     def dagger_ver = "2.25.2"
     implementation "com.google.dagger:dagger:$dagger_ver"
     kapt "com.google.dagger:dagger-compiler:$dagger_ver"
+
+    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
 }

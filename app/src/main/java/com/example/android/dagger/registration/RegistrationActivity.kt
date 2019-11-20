@@ -19,6 +19,8 @@ package com.example.android.dagger.registration
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.android.dagger.MyApplication
 import com.example.android.dagger.R
 import com.example.android.dagger.main.MainActivity
@@ -29,7 +31,11 @@ import javax.inject.Inject
 class RegistrationActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var registrationViewModel: RegistrationViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val registrationViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory)[RegistrationViewModel::class.java]
+    }
 
     lateinit var registrationComponent: RegistrationComponent
 

@@ -21,6 +21,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.android.dagger.MyApplication
 import com.example.android.dagger.R
 import com.example.android.dagger.login.LoginActivity
@@ -31,7 +33,11 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var mainViewModel: MainViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val mainViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory)[MainViewModel::class.java]
+    }
 
     /**
      * If the User is not registered, RegistrationActivity will be launched,

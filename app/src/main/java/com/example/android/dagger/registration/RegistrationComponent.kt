@@ -6,7 +6,7 @@ import com.example.android.dagger.registration.termsandconditions.TermsAndCondit
 import dagger.Subcomponent
 
 @ActivityScope
-@Subcomponent
+@Subcomponent(modules = [RegistrationModules::class])
 interface RegistrationComponent {
 
     @Subcomponent.Factory

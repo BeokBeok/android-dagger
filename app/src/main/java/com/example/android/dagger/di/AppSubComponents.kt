@@ -1,8 +1,10 @@
 package com.example.android.dagger.di
 
+import androidx.lifecycle.ViewModelProvider
 import com.example.android.dagger.login.LoginComponent
 import com.example.android.dagger.registration.RegistrationComponent
 import com.example.android.dagger.user.UserComponent
+import dagger.Binds
 import dagger.Module
 
 @Module(subcomponents = [
@@ -10,4 +12,8 @@ import dagger.Module
     LoginComponent::class,
     UserComponent::class
 ])
-class AppSubComponent
+abstract class AppSubComponents {
+
+    @Binds
+    abstract fun bindViewModelFactory(viewModelFactory: ViewModelFactory): ViewModelProvider.Factory
+}

@@ -25,6 +25,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.android.dagger.MyApplication
 import com.example.android.dagger.R
 import com.example.android.dagger.main.MainActivity
@@ -34,7 +36,12 @@ import javax.inject.Inject
 class LoginActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var loginViewModel: LoginViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val loginViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory)[LoginViewModel::class.java]
+    }
+
     private lateinit var errorTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -20,6 +20,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.android.dagger.MyApplication
 import com.example.android.dagger.R
 import com.example.android.dagger.login.LoginActivity
@@ -28,7 +30,11 @@ import javax.inject.Inject
 class SettingsActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var settingsViewModel: SettingsViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val settingsViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory)[SettingsViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as MyApplication).appComponent
